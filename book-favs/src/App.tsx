@@ -3,30 +3,29 @@ import AddBookForm from "./components/AddBookForm";
 import Header from "./components/Header";
 import type { Book } from "./types";
 
-import BooksList from "./components/BookList";
+import BooksList from "./components/BooksList";
 import FavoriteCart from "./components/FavoriteCart";
 
 function App() {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [favorites, setFavorites] = useState<Book[]>([]);
-  const [showCart, setShowCart] = useState(false);
+  const [books, setBooks] = useState<Book[]>(() => {
+    const stored = localStorage.getItem("books")
+    return stored ? JSON.parse(stored) : []
+  })
+
+  const [favorites, setFavorites] = useState<Book[]>(() => {
+    const stored = localStorage.getItem("favorites")
+    return stored ? JSON.parse(stored) : []
+  })
+
+  const [showCart, setShowCart] = useState(false)
 
   useEffect(() => {
-    const storedBooks = localStorage.getItem("books");
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedBooks) setBooks(JSON.parse(storedBooks));
-    if (storedFavorites) setFavorites(JSON.parse(storedFavorites));
-  }, []);
-
+    localStorage.setItem("books", JSON.stringify(books))
+  }, [books])
 
   useEffect(() => {
-    localStorage.setItem("books", JSON.stringify(books));
-  }, [books]);
-
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+    localStorage.setItem("favorites", JSON.stringify(favorites))
+  }, [favorites])
 
   const handleAdd = (book: Book) => setBooks((prev) => [book, ...prev]);
   const handleRemove = (id: string) =>
