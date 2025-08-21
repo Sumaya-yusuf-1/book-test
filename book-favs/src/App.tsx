@@ -46,17 +46,16 @@ function App() {
   const removeFavorite = (id: string) =>
     setFavorites(prev => prev.filter(b => b.id !== id));
 
-  return (
-    <>
+ return (
+  <>
+    <div className="glass-shell">
       <Header
         favCount={favorites.length}
         onToggleCart={() => setShowCart(s => !s)}
       />
 
-      {/* Låt CSS-filen styra layouten för <main> i stället för inline styles */}
       <main>
         <AddBookForm onAdd={handleAdd} />
-
         <section>
           <h2>Böcker</h2>
           <BooksList
@@ -67,15 +66,16 @@ function App() {
           />
         </section>
       </main>
+    </div>
 
-      <FavoriteCart
-        favorites={favorites}
-        visible={showCart}
-        onRemove={removeFavorite}
-        onClose={() => setShowCart(false)}
-      />
-    </>
-  );
+    <FavoriteCart
+      favorites={favorites}
+      visible={showCart}
+      onRemove={removeFavorite}
+      onClose={() => setShowCart(false)}
+    />
+  </>
+);
 }
 
 export default App;
