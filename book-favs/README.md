@@ -40,6 +40,9 @@ Integrationstester
 	3.	Öppna favoritkorgen.
 	4.	Verifiera att favoritboken visas i korgen.
 
+
+
+
 ▶️ Köra projektet
 
 Installera beroenden:
@@ -51,6 +54,33 @@ Starta dev-server:
 #npm run dev
 
 
+🧪 Kom igång med Vitest
+
+1. Installera Vitest och Testing Library
+#npm install -D vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom
+
+2. Konfigurera Vitest (vite.config.ts)
+
+#/// <reference types="vitest" />
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: "jsdom",   // nödvändigt för att testa React-komponenter
+    globals: true,          // gör att describe/it/expect fungerar utan import
+    setupFiles: "./src/setupTests.ts", // laddas innan tester körs
+  },
+});
+
+3. Setup-fil för jest-dom (src/setupTests.ts)
+
+#import "@testing-library/jest-dom";
+
+4. Skapa en testfil
+
+
 🧪 Köra tester
 
 #npm run test
@@ -58,3 +88,5 @@ Starta dev-server:
 Se mer detaljerad output (alla testnamn):
 
 #npx vitest --reporter=verbose
+
+

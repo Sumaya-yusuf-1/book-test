@@ -33,7 +33,7 @@ export default function FavoriteCart({
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.4)", // mörk bakgrund
+        background: "rgba(0,0,0,0.4)",
         display: "flex",
         justifyContent: "flex-end",
         zIndex: 100,
