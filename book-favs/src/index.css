@@ -1,5 +1,4 @@
-/* ====== Bakgrund (svag gradient + ev. hero-bild) ====== 
-/* ====== Bakgrund (svag gradient / hero-känsla) ====== */
+
 body {
   background:
     linear-gradient(
@@ -31,7 +30,7 @@ body {
   background-size: cover;
   background-position: center;
 }
-/* ====== MAIN som stor glaspanel (utan att ändra JSX) ====== */
+/* ====== MAIN  ====== */
 main {
   max-width: 960px;
   margin: 2rem auto;
