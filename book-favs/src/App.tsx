@@ -5,6 +5,7 @@ import type { Book } from "./types";
 
 import BooksList from "./components/BooksList";
 import FavoriteCart from "./components/FavoriteCart";
+import "./index.css";
 
 function App() {
   const [books, setBooks] = useState<Book[]>(() => {

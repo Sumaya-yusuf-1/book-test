@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from "react";
 import type { Book } from "../types";
 
+
 type AddBookFormProps = {
   onAdd: (book: Book) => void;
 };
@@ -31,72 +32,40 @@ export default function AddBookForm({ onAdd }: AddBookFormProps) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      aria-label='Lägg till bok'
-      style={{
-        background: "#fff",
-        padding: "1rem",
-        borderRadius: 12,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-        marginBottom: "1rem",
-      }}
-    >
-      <h2 style={{ marginTop: 0 }}>Lägg till bok</h2>
+    <form aria-label="Lägg till bok" onSubmit={handleSubmit}>
+      <h2>Lägg till bok</h2>
 
-      <div style={{ marginBottom: "0.5rem" }}>
-        <label htmlFor='title'>Titel</label>
-        <input
-          id='title'
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder='Sagan om ringen'
-          style={{ width: "100%", padding: "0.5rem" }}
-        />
-      </div>
+      <label htmlFor="title">Titel</label>
+      <input
+        id="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Sagan om ringen"
+      />
 
-      <div style={{ marginBottom: "0.5rem" }}>
-        <label htmlFor='author'>Författare</label>
-        <input
-          id='author'
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          placeholder='J.R.R. Tolkien'
-          style={{ width: "100%", padding: "0.5rem" }}
-        />
-      </div>
+      <label htmlFor="author">Författare</label>
+      <input
+        id="author"
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
+        placeholder="J.R.R. Tolkien"
+      />
 
-      <div style={{ marginBottom: "0.5rem" }}>
-        <label htmlFor='image'>Bild-URL</label>
-        <input
-          id='image'
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          placeholder='https://exempel.com/omslag.jpg'
-          style={{ width: "100%", padding: "0.5rem" }}
-        />
-      </div>
+      <label htmlFor="image">Bild-URL</label>
+      <input
+        id="image"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+        placeholder="https://exempel.com/omslag.jpg"
+      />
 
       {error && (
-        <p role='alert' style={{ color: "#EF4444", marginTop: 0 }}>
+        <p role="alert" style={{ color: "red" }}>
           {error}
         </p>
       )}
 
-      <button
-        type='submit'
-        style={{
-          background: "#3B82F6",
-          color: "white",
-          border: 0,
-          padding: "0.6rem 1rem",
-          borderRadius: 8,
-          cursor: "pointer",
-          fontWeight: 600,
-        }}
-      >
-        + Lägg till
-      </button>
+      <button type="submit">+ Lägg till</button>
     </form>
   );
 }
