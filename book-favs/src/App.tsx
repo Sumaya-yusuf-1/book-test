@@ -2,62 +2,59 @@ import { useEffect, useState } from "react";
 import AddBookForm from "./components/AddBookForm";
 import Header from "./components/Header";
 import type { Book } from "./types";
-
 import BooksList from "./components/BooksList";
 import FavoriteCart from "./components/FavoriteCart";
 import "./index.css";
 
 function App() {
   const [books, setBooks] = useState<Book[]>(() => {
-    const stored = localStorage.getItem("books")
-    return stored ? JSON.parse(stored) : []
-  })
+    const stored = localStorage.getItem("books");
+    return stored ? JSON.parse(stored) : [];
+  });
 
   const [favorites, setFavorites] = useState<Book[]>(() => {
-    const stored = localStorage.getItem("favorites")
-    return stored ? JSON.parse(stored) : []
-  })
+    const stored = localStorage.getItem("favorites");
+    return stored ? JSON.parse(stored) : [];
+  });
 
-  const [showCart, setShowCart] = useState(false)
-
-  useEffect(() => {
-    localStorage.setItem("books", JSON.stringify(books))
-  }, [books])
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites))
-  }, [favorites])
+    localStorage.setItem("books", JSON.stringify(books));
+  }, [books]);
 
-  const handleAdd = (book: Book) => setBooks((prev) => [book, ...prev]);
-  const handleRemove = (id: string) =>
-    setBooks((prev) => prev.filter((b) => b.id !== id));
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const handleAdd = (book: Book) => setBooks(prev => [book, ...prev]);
+
+  // Ta bort bok helt och rensa samtidigt ur favoriter
+  const handleRemoveBook = (id: string) => {
+    setBooks(prev => prev.filter(b => b.id !== id));
+    setFavorites(prev => prev.filter(f => f.id !== id));
+  };
 
   const toggleFavorite = (book: Book) => {
-    setFavorites((prev) =>
-      prev.find((b) => b.id === book.id)
-        ? prev.filter((b) => b.id !== book.id)
-        : [...prev, book]
+    setFavorites(prev =>
+      prev.some(b => b.id === book.id)
+        ? prev.filter(b => b.id !== book.id)
+        : [book, ...prev]
     );
   };
 
   const removeFavorite = (id: string) =>
-    setFavorites((prev) => prev.filter((b) => b.id !== id));
+    setFavorites(prev => prev.filter(b => b.id !== id));
 
   return (
     <>
       <Header
         favCount={favorites.length}
-        onToggleCart={() => setShowCart((s) => !s)}
+        onToggleCart={() => setShowCart(s => !s)}
       />
 
-      <main
-        style={{
-          maxWidth: 920,
-          margin: "1.5rem auto",
-          padding: "0 1rem",
-          fontFamily: "system-ui, sans-serif",
-        }}
-      >
+      {/* Låt CSS-filen styra layouten för <main> i stället för inline styles */}
+      <main>
         <AddBookForm onAdd={handleAdd} />
 
         <section>
@@ -66,7 +63,7 @@ function App() {
             books={books}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
-            onRemove={handleRemove}
+            onRemove={handleRemoveBook}
           />
         </section>
       </main>
@@ -75,6 +72,7 @@ function App() {
         favorites={favorites}
         visible={showCart}
         onRemove={removeFavorite}
+        onClose={() => setShowCart(false)}
       />
     </>
   );

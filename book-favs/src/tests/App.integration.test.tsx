@@ -1,23 +1,29 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
-import App from "../App";
+import { beforeEach, describe, expect, it } from "vitest";
+
 import "@testing-library/jest-dom";
+import App from "../App";
+
+// Nollställ localStorage innan varje test
+beforeEach(() => {
+  localStorage.clear();
+});
 
 describe("App integration", () => {
   it("lägger till en bok via formuläret och visar den i boklistan", async () => {
     const user = userEvent.setup();
     render(<App />);
 
-    // fyll i formuläret
+
     await user.type(screen.getByLabelText(/titel/i), "Dune");
     await user.type(screen.getByLabelText(/författare/i), "Frank Herbert");
     await user.type(
       screen.getByLabelText(/bild-url/i),
-      "https://exempel.com/dune.jpg"
+      "https://exempel.com/bhbjh.jpg"
     );
 
-    // klicka på lägg till
+ 
     await user.click(screen.getByRole("button", { name: /\+ lägg till/i }));
 
     // kontrollera att boken syns i listan
@@ -26,21 +32,21 @@ describe("App integration", () => {
     expect(within(list).getByText(/frank herbert/i)).toBeInTheDocument();
   });
 
-  it("kan lägga till bok som favorit och se den i favoritkorgen", async () => {
+  it("kan lägga till en bok som favorit och se den i favoritkorgen", async () => {
     const user = userEvent.setup();
     render(<App />);
 
-    // lägg till en bok
+  
     await user.type(screen.getByLabelText(/titel/i), "The Hobbit");
     await user.type(screen.getByLabelText(/författare/i), "J.R.R. Tolkien");
     await user.click(screen.getByRole("button", { name: /\+ lägg till/i }));
 
-    // markera som favorit
+    
     await user.click(
       screen.getByRole("button", { name: /favorit the hobbit/i })
     );
 
-    // badge ska visa 1
+    // badge ska visa "1"
     expect(screen.getByLabelText(/antal favoriter/i)).toHaveTextContent("1");
 
     // öppna favoritkorgen
