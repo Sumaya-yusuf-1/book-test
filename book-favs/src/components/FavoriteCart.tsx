@@ -1,4 +1,3 @@
-
 import type { Book } from "../types";
 
 type FavoriteCartProps = {
@@ -16,8 +15,6 @@ export default function FavoriteCart({
 }: FavoriteCartProps) {
   if (!visible) return null;
 
-  
-
   // Klick på overlay = stäng
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -27,8 +24,8 @@ export default function FavoriteCart({
 
   return (
     <div
-      className="cart-overlay"
-      role="presentation"
+      className='cart-overlay'
+      role='presentation'
       onClick={handleBackdropClick}
       style={{
         position: "fixed",
@@ -40,9 +37,9 @@ export default function FavoriteCart({
       }}
     >
       <aside
-        role="complementary"
-        aria-label="Favoritkorg"
-        className="cart-panel"
+        role='complementary'
+        aria-label='Favoritkorg'
+        className='cart-panel'
         style={{
           width: "320px",
           height: "100%",
@@ -54,7 +51,13 @@ export default function FavoriteCart({
         <h2>Favoriter</h2>
 
         {favorites.length === 0 ? (
-          <p>Inga favoriter än.</p>
+          <p
+            style={{
+              color: "white",
+            }}
+          >
+            Inga favoriter än.
+          </p>
         ) : (
           <ul>
             {favorites.map((f) => (

@@ -284,7 +284,7 @@ ul[aria-label="Boklista"] button[aria-label^="Ta bort"] {
   margin: 0 0 0.5rem 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #fefeff;
 }
 
 /* Listan: inga bullets, tight men läsbart */
@@ -294,6 +294,8 @@ ul[aria-label="Boklista"] button[aria-label^="Ta bort"] {
   padding: 0;
   display: grid;
   gap: 0.5rem;
+
+
 }
 
 /* Varje favorit-rad */
@@ -304,6 +306,7 @@ ul[aria-label="Boklista"] button[aria-label^="Ta bort"] {
   align-items: center;
   padding: 0.5rem 0.25rem;
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+ 
 }
 
 /* Thumb/placeholder större och konsekvent */
@@ -315,11 +318,12 @@ ul[aria-label="Boklista"] button[aria-label^="Ta bort"] {
   object-fit: cover;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Titelkolumn */
 .cart-panel li span {
-  color: #0f172a;
+  color: #ffffff;
   font-weight: 600;
   line-height: 1.2;
 }
